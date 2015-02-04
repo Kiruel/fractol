@@ -6,7 +6,7 @@
 /*   By: etheodor <etheodor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/28 17:40:39 by etheodor          #+#    #+#             */
-/*   Updated: 2015/01/09 15:00:21 by etheodor         ###   ########.fr       */
+/*   Updated: 2015/02/04 11:06:11 by etheodor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,28 +105,28 @@ int		key_hook(int keycode, t_env *e)
 {
 	ft_putnbr(e->zoom);
 	ft_putchar('\n');
-	if (keycode == 65307)
+	if (keycode == KEY_ECHAP)
 	{
 		mlx_destroy_window(e->mlx, e->win);
 		free(e);
 		exit(0);
 	}
-	if (keycode == 49)
+	if (keycode == KEY_1)
 	{
 		e->how_window = 0;
 		ft_update_img(e, draw_sierpinski);
 	}
-	if (keycode == 50)
+	if (keycode == KEY_2)
 	{
 		e->how_window = 1;
 		ft_update_img(e, draw_mandelbrot);
 	}
-	if (keycode == 51)
+	if (keycode == KEY_3)
 	{
 		e->how_window = 2;
 		ft_update_img(e, draw_julia);
 	}
-	if (keycode == 65363)
+	if (keycode == KEY_RIGHT)
 	{
 		e->moveX /= SPEED_TRANSLATE;
 		if (e->how_window == 0)
@@ -136,7 +136,7 @@ int		key_hook(int keycode, t_env *e)
 		if (e->how_window == 2)
 			ft_update_img(e, draw_julia);		
 	}
-	if (keycode == 65361)
+	if (keycode == KEY_LEFT)
 	{
 		e->moveX *= SPEED_TRANSLATE;
 		if (e->how_window == 0)
@@ -146,20 +146,9 @@ int		key_hook(int keycode, t_env *e)
 		if (e->how_window == 2)
 			ft_update_img(e, draw_julia);		
 	}
-	if (keycode == 65364)
+	if (keycode == KEY_DOWN)
 	{
-		if (e->zoom > 10)
-		{
-			e->moveY /= 20;
-		}
-		else if (e->zoom > 13000)
-		{
-			e->moveY /= 300;			
-		}
-		else
-		{
-			e->moveY /= SPEED_TRANSLATE;
-		}
+		e->moveY /= SPEED_TRANSLATE;
 		if (e->how_window == 0)
 			ft_update_img(e, draw_sierpinski);
 		if (e->how_window == 1)
@@ -167,7 +156,7 @@ int		key_hook(int keycode, t_env *e)
 		if (e->how_window == 2)
 			ft_update_img(e, draw_julia);		
 	}
-	if (keycode == 65362)
+	if (keycode == KEY_UP)
 	{
 		e->moveY *= SPEED_TRANSLATE;
 		if (e->how_window == 0)
@@ -177,12 +166,9 @@ int		key_hook(int keycode, t_env *e)
 		if (e->how_window == 2)
 			ft_update_img(e, draw_julia);		
 	}
-	if (keycode == 65451 || keycode == 61)
+	if (keycode == KEY_MORE_NUM || keycode == KEY_MORE)
 	{
-		if (e->zoom	== 1721578050)
-			return (0);
-		else
-			e->zoom *= 1.5;
+		e->zoom *= 1.5;
 		if (e->how_window == 0)
 			ft_update_img(e, draw_sierpinski);
 		if (e->how_window == 1)
@@ -190,12 +176,9 @@ int		key_hook(int keycode, t_env *e)
 		if (e->how_window == 2)
 			ft_update_img(e, draw_julia);		
 	}
-	if (keycode == 65453 || keycode == 45)
+	if (keycode == KEY_LESS_NUM || keycode == KEY_LESS)
 	{
-		if (e->zoom	== 1721578050)
-			return (0);
-		else
-			e->zoom /= 1.5;
+		e->zoom /= 1.5;
 		if (e->how_window == 0)
 			ft_update_img(e, draw_sierpinski);
 		if (e->how_window == 1)
@@ -203,7 +186,7 @@ int		key_hook(int keycode, t_env *e)
 		if (e->how_window == 2)
 			ft_update_img(e, draw_julia);		
 	}
-	if (keycode == 114)
+	if (keycode == KEY_R)
 	{
 		e->zoom = 0.8;
 		if (e->how_window == 0)
@@ -213,8 +196,8 @@ int		key_hook(int keycode, t_env *e)
 		if (e->how_window == 2)
 			ft_update_img(e, draw_julia);
 	}
-	ft_putnbr(keycode);
-	ft_putchar('\n');
+	// ft_putnbr(keycode);
+	// ft_putchar('\n');
 	return (0);
 }
 

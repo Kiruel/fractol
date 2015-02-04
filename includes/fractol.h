@@ -6,13 +6,14 @@
 /*   By: etheodor <etheodor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/28 17:35:34 by etheodor          #+#    #+#             */
-/*   Updated: 2015/01/09 15:02:04 by etheodor         ###   ########.fr       */
+/*   Updated: 2015/02/04 10:39:58 by etheodor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FRACTOL
 # define FRACTOL
 # include "mlx.h"
+# include "key.h"
 # include <math.h>
 # include <stdlib.h>
 # include "../libft/includes/libft.h"
