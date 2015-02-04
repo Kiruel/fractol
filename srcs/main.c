@@ -6,94 +6,11 @@
 /*   By: etheodor <etheodor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/28 17:40:39 by etheodor          #+#    #+#             */
-/*   Updated: 2015/02/04 11:06:11 by etheodor         ###   ########.fr       */
+/*   Updated: 2015/02/04 13:40:40 by etheodor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-
-void	draw_sierpinski(t_env *e)
-{
-	e->x = 0;
-	e->y = 0;
-	while (e->x <= DEFAUT_X)
-	{
-		e->y = 0;
-		while (e->y <= DEFAUT_Y)
-		{
-			if (!((e->x / 1) % 3 == 1 && (e->y / 1) % 3 == 1) && !((e->x / 3) % 3 == 1
-				&& (e->y / 3) % 3 == 1) && !((e->x / 9) % 3 == 1 && (e->y / 9) % 3 == 1)
-				&& !((e->x / 27) % 3 == 1 && (e->y / 27) % 3 == 1)
-				&& !((e->x / 81) % 3 == 1 && (e->y / 81) % 3 == 1)
-				&& !((e->x / 243) % 3 == 1 && (e->y / 243) % 3 == 1))
-			ft_put_pixel_to_image(e, e->x, e->y, 0xFFFFFF);
-			e->y++;
-		}
-		e->x++;
-	}
-}
-
-void	draw_mandelbrot(t_env *e)
-{
-	e->x = 0;
-	e->y = 0;
-    e->i = 0;
-	while (e->x <= DEFAUT_X)
-	{
-		e->y = 0;
-		while (e->y <= DEFAUT_Y)
-		{
-			e->pr = 1.5 * (e->x - DEFAUT_X / 2) / (0.5 * e->zoom * DEFAUT_X) + e->moveX;
-	        e->pi = (e->y - DEFAUT_Y / 2) / (0.5 * e->zoom * DEFAUT_Y) + e->moveY;
-	        e->newRe = e->newIm = e->oldRe = e->oldIm = 0;
-	        e->i = 0;
-	        while (e->i < e->maxIterations)
-	        {
-	            e->oldRe = e->newRe;
-	            e->oldIm = e->newIm;
-	            e->newRe = e->oldRe * e->oldRe - e->oldIm * e->oldIm + e->pr;
-	            e->newIm = 2 * e->oldRe * e->oldIm + e->pi;
-	            if((e->newRe * e->newRe + e->newIm * e->newIm) > 4) 
-	            	break;
-	        	e->i++;
-	        }
-			ft_put_pixel_to_image(e, e->x, e->y, 0x0F << e->i);
-			e->y++;
-		}
-		e->x++;
-	}
-}
-
-void	draw_julia(t_env *e)
-{
-	e->cRe = -0.70176;
-	e->cIm = -0.3842;
-	e->x = 0;
-	e->y = 0;
-    e->i = 0;
-	while (e->x < DEFAUT_X)
-	{
-		e->y = 0;
-		while (e->y < DEFAUT_Y)
-		{
-			e->newRe = 1.5 * (e->x - DEFAUT_X / 2) / (0.5 * e->zoom * DEFAUT_X) + e->moveX;
-			e->newIm = (e->y - DEFAUT_Y / 2) / (0.5 * e->zoom * DEFAUT_Y) + e->moveY;
-			e->i = 0;
-			while (e->i < e->maxIterations)
-			{
-				e->oldRe = e->newRe;
-				e->oldIm = e->newIm;
-				e->newRe = e->oldRe * e->oldRe - e->oldIm * e->oldIm + e->cRe;
-				e->newIm = 2 * e->oldRe * e->oldIm + e->cIm;
-				if((e->newRe * e->newRe + e->newIm * e->newIm) > 4) break;				
-				e->i++;
-			}
-			ft_put_pixel_to_image(e, e->x, e->y, 0x0F << e->i);
-			e->y++;
-		}
-		e->x++;
-    }
-}
 
 int		expose_hook(t_env *e)
 {
@@ -101,10 +18,23 @@ int		expose_hook(t_env *e)
 	return (0);
 }
 
+void	ft_show_variable(t_env *e)
+{
+	ft_putstr("####### VARIABLES #######\n");
+	ft_putstr("## maxIterations : ");
+	ft_putnbr(e->maxIterations);
+	ft_putstr("\n");
+	ft_putstr("##          zoom : ");
+	ft_putnbr(e->zoom);
+	ft_putstr("\n");
+}
+
 int		key_hook(int keycode, t_env *e)
 {
-	ft_putnbr(e->zoom);
-	ft_putchar('\n');
+	if (keycode == KEY_V)
+	{
+		ft_show_variable(e);		
+	}
 	if (keycode == KEY_ECHAP)
 	{
 		mlx_destroy_window(e->mlx, e->win);
@@ -128,43 +58,43 @@ int		key_hook(int keycode, t_env *e)
 	}
 	if (keycode == KEY_RIGHT)
 	{
-		e->moveX /= SPEED_TRANSLATE;
+		e->moveX -= (SPEED_TRANSLATE / e->zoom);
 		if (e->how_window == 0)
 			ft_update_img(e, draw_sierpinski);
 		if (e->how_window == 1)
 			ft_update_img(e, draw_mandelbrot);
 		if (e->how_window == 2)
-			ft_update_img(e, draw_julia);		
+			ft_update_img(e, draw_julia);
 	}
 	if (keycode == KEY_LEFT)
 	{
-		e->moveX *= SPEED_TRANSLATE;
+		e->moveX += (SPEED_TRANSLATE / e->zoom);
 		if (e->how_window == 0)
 			ft_update_img(e, draw_sierpinski);
 		if (e->how_window == 1)
 			ft_update_img(e, draw_mandelbrot);
 		if (e->how_window == 2)
-			ft_update_img(e, draw_julia);		
+			ft_update_img(e, draw_julia);
 	}
 	if (keycode == KEY_DOWN)
 	{
-		e->moveY /= SPEED_TRANSLATE;
+		e->moveY -= (SPEED_TRANSLATE / e->zoom);
 		if (e->how_window == 0)
 			ft_update_img(e, draw_sierpinski);
 		if (e->how_window == 1)
 			ft_update_img(e, draw_mandelbrot);
 		if (e->how_window == 2)
-			ft_update_img(e, draw_julia);		
+			ft_update_img(e, draw_julia);
 	}
 	if (keycode == KEY_UP)
 	{
-		e->moveY *= SPEED_TRANSLATE;
+		e->moveY += (SPEED_TRANSLATE / e->zoom);
 		if (e->how_window == 0)
 			ft_update_img(e, draw_sierpinski);
 		if (e->how_window == 1)
 			ft_update_img(e, draw_mandelbrot);
 		if (e->how_window == 2)
-			ft_update_img(e, draw_julia);		
+			ft_update_img(e, draw_julia);
 	}
 	if (keycode == KEY_MORE_NUM || keycode == KEY_MORE)
 	{
@@ -184,7 +114,7 @@ int		key_hook(int keycode, t_env *e)
 		if (e->how_window == 1)
 			ft_update_img(e, draw_mandelbrot);
 		if (e->how_window == 2)
-			ft_update_img(e, draw_julia);		
+			ft_update_img(e, draw_julia);
 	}
 	if (keycode == KEY_R)
 	{
@@ -195,6 +125,26 @@ int		key_hook(int keycode, t_env *e)
 			ft_update_img(e, draw_mandelbrot);
 		if (e->how_window == 2)
 			ft_update_img(e, draw_julia);
+	}
+	if (keycode == KEY_3_NUM)
+	{
+		e->maxIterations += 10;
+		if (e->how_window == 0)
+			ft_update_img(e, draw_sierpinski);
+		if (e->how_window == 1)
+			ft_update_img(e, draw_mandelbrot);
+		if (e->how_window == 2)
+			ft_update_img(e, draw_julia);		
+	}
+	if (keycode == KEY_2_NUM)
+	{
+		e->maxIterations -= 10;
+		if (e->how_window == 0)
+			ft_update_img(e, draw_sierpinski);
+		if (e->how_window == 1)
+			ft_update_img(e, draw_mandelbrot);
+		if (e->how_window == 2)
+			ft_update_img(e, draw_julia);		
 	}
 	// ft_putnbr(keycode);
 	// ft_putchar('\n');
@@ -218,7 +168,7 @@ int		main(int ac, char **av, char **ev)
     e->moveY = 0.1;
 	e->zoom = 0.8;
     e->how_window = 0;
-	e->maxIterations = 300;
+	e->maxIterations = 200;
 	e->mlx = mlx_init();
 	e->win = mlx_new_window(e->mlx, DEFAUT_X, DEFAUT_Y, "fractol");
 	mlx_hook(e->win, 2, 3, key_hook, e);

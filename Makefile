@@ -21,12 +21,14 @@ LIBFT = ./libft/includes
 SOURCE = ./srcs/main.c \
 		./srcs/ft_mlx_tools.c \
 		./srcs/ft_error.c \
-		./srcs/ft_error2.c
+		./srcs/ft_error2.c \
+		./srcs/ft_fractals.c
 
 POINTO = main.o \
 		ft_mlx_tools.o \
 		ft_error.o \
-		ft_error2.o
+		ft_error2.o \
+		ft_fractals.o
 
 all: $(NAME)
 	@echo "all: OK"

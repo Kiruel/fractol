@@ -6,7 +6,7 @@
 /*   By: etheodor <etheodor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/28 17:35:34 by etheodor          #+#    #+#             */
-/*   Updated: 2015/02/04 10:39:58 by etheodor         ###   ########.fr       */
+/*   Updated: 2015/02/04 13:00:36 by etheodor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include "../libft/includes/libft.h"
 # define DEFAUT_X 600
 # define DEFAUT_Y 400
-# define SPEED_TRANSLATE 1.1
+# define SPEED_TRANSLATE 0.05
 # define WHITE 0xFFFFFF
 
 typedef struct 	s_env
@@ -37,7 +37,7 @@ typedef struct 	s_env
     double		newIm;
     double		oldRe;
     double		oldIm;
-    double		zoom;
+    long double		zoom;
     double		moveX;
     double		moveY;
 	double		cRe;
@@ -60,5 +60,8 @@ int		ft_open(char *file);
 void	ft_map_error(void);
 void	ft_error(char *str);
 void	ft_mallerr(void);
+void	draw_julia(t_env *e);
+void	draw_mandelbrot(t_env *e);
+void	draw_sierpinski(t_env *e);
 
 #endif
