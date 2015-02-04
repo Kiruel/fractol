@@ -18,7 +18,7 @@
 # include "../libft/includes/libft.h"
 # define DEFAUT_X 600
 # define DEFAUT_Y 400
-# define SPEED_TRANSLATE 0.01
+# define SPEED_TRANSLATE 1.1
 # define WHITE 0xFFFFFF
 
 typedef struct 	s_env

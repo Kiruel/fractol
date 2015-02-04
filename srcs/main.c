@@ -37,7 +37,6 @@ void	draw_mandelbrot(t_env *e)
 {
 	e->x = 0;
 	e->y = 0;
-    e->maxIterations = 300;
     e->i = 0;
 	while (e->x <= DEFAUT_X)
 	{
@@ -71,7 +70,6 @@ void	draw_julia(t_env *e)
 	e->cIm = -0.3842;
 	e->x = 0;
 	e->y = 0;
-    e->maxIterations = 300;
     e->i = 0;
 	while (e->x < DEFAUT_X)
 	{
@@ -105,6 +103,8 @@ int		expose_hook(t_env *e)
 
 int		key_hook(int keycode, t_env *e)
 {
+	ft_putnbr(e->zoom);
+	ft_putchar('\n');
 	if (keycode == 65307)
 	{
 		mlx_destroy_window(e->mlx, e->win);
@@ -128,7 +128,7 @@ int		key_hook(int keycode, t_env *e)
 	}
 	if (keycode == 65363)
 	{
-		e->moveX -= SPEED_TRANSLATE;
+		e->moveX /= SPEED_TRANSLATE;
 		if (e->how_window == 0)
 			ft_update_img(e, draw_sierpinski);
 		if (e->how_window == 1)
@@ -138,7 +138,7 @@ int		key_hook(int keycode, t_env *e)
 	}
 	if (keycode == 65361)
 	{
-		e->moveX += SPEED_TRANSLATE;
+		e->moveX *= SPEED_TRANSLATE;
 		if (e->how_window == 0)
 			ft_update_img(e, draw_sierpinski);
 		if (e->how_window == 1)
@@ -148,7 +148,18 @@ int		key_hook(int keycode, t_env *e)
 	}
 	if (keycode == 65364)
 	{
-		e->moveY -= SPEED_TRANSLATE;
+		if (e->zoom > 10)
+		{
+			e->moveY /= 20;
+		}
+		else if (e->zoom > 13000)
+		{
+			e->moveY /= 300;			
+		}
+		else
+		{
+			e->moveY /= SPEED_TRANSLATE;
+		}
 		if (e->how_window == 0)
 			ft_update_img(e, draw_sierpinski);
 		if (e->how_window == 1)
@@ -158,7 +169,7 @@ int		key_hook(int keycode, t_env *e)
 	}
 	if (keycode == 65362)
 	{
-		e->moveY += SPEED_TRANSLATE;
+		e->moveY *= SPEED_TRANSLATE;
 		if (e->how_window == 0)
 			ft_update_img(e, draw_sierpinski);
 		if (e->how_window == 1)
@@ -166,9 +177,12 @@ int		key_hook(int keycode, t_env *e)
 		if (e->how_window == 2)
 			ft_update_img(e, draw_julia);		
 	}
-	if (keycode == 65451)
+	if (keycode == 65451 || keycode == 61)
 	{
-		e->zoom *= 1.5;
+		if (e->zoom	== 1721578050)
+			return (0);
+		else
+			e->zoom *= 1.5;
 		if (e->how_window == 0)
 			ft_update_img(e, draw_sierpinski);
 		if (e->how_window == 1)
@@ -176,9 +190,12 @@ int		key_hook(int keycode, t_env *e)
 		if (e->how_window == 2)
 			ft_update_img(e, draw_julia);		
 	}
-	if (keycode == 65453)
+	if (keycode == 65453 || keycode == 45)
 	{
-		e->zoom /= 1.5;
+		if (e->zoom	== 1721578050)
+			return (0);
+		else
+			e->zoom /= 1.5;
 		if (e->how_window == 0)
 			ft_update_img(e, draw_sierpinski);
 		if (e->how_window == 1)
@@ -186,8 +203,18 @@ int		key_hook(int keycode, t_env *e)
 		if (e->how_window == 2)
 			ft_update_img(e, draw_julia);		
 	}
-	// ft_putnbr(keycode);
-	// ft_putchar('\n');
+	if (keycode == 114)
+	{
+		e->zoom = 0.8;
+		if (e->how_window == 0)
+			ft_update_img(e, draw_sierpinski);
+		if (e->how_window == 1)
+			ft_update_img(e, draw_mandelbrot);
+		if (e->how_window == 2)
+			ft_update_img(e, draw_julia);
+	}
+	ft_putnbr(keycode);
+	ft_putchar('\n');
 	return (0);
 }
 
@@ -204,10 +231,11 @@ int		main(int ac, char **av, char **ev)
 		return (0);
 	if ((e = (t_env*)ft_memalloc(sizeof(t_env))) == NULL)
 		ft_mallerr();
-    e->moveX = 0;
-    e->moveY = 0;
+    e->moveX = 0.1;
+    e->moveY = 0.1;
 	e->zoom = 0.8;
     e->how_window = 0;
+	e->maxIterations = 300;
 	e->mlx = mlx_init();
 	e->win = mlx_new_window(e->mlx, DEFAUT_X, DEFAUT_Y, "fractol");
 	mlx_hook(e->win, 2, 3, key_hook, e);
