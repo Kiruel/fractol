@@ -14,13 +14,22 @@
 # define FRACTOL
 # include "mlx.h"
 # include "key.h"
+# include <stdio.h>
 # include <math.h>
 # include <stdlib.h>
 # include "../libft/includes/libft.h"
-# define DEFAUT_X 600
-# define DEFAUT_Y 400
+# define DEFAUT_X 400
+# define DEFAUT_Y 300
+# define DEFAUT_CRE -0.70176
+# define DEFAUT_CIM -0.3842
 # define SPEED_TRANSLATE 0.05
 # define WHITE 0xFFFFFF
+
+typedef	struct 	s_ctr
+{
+	int			x;
+	int			y;
+}				t_ctr;
 
 typedef struct 	s_env
 {
@@ -48,6 +57,7 @@ typedef struct 	s_env
 	int 		y;
 	int			i;
 	int			k;
+	t_ctr		ctr;
 }				t_env;
 
 void	ft_put_pixel_to_image(t_env *ret, int x, int y, int color);

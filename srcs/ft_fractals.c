@@ -65,8 +65,6 @@ void	draw_mandelbrot(t_env *e)
 
 void	draw_julia(t_env *e)
 {
-	e->cRe = -0.70176;
-	e->cIm = -0.3842;
 	e->x = 0;
 	e->y = 0;
     e->i = 0;
