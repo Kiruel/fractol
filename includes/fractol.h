@@ -6,7 +6,7 @@
 /*   By: etheodor <etheodor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/28 17:35:34 by etheodor          #+#    #+#             */
-/*   Updated: 2015/02/04 13:00:36 by etheodor         ###   ########.fr       */
+/*   Updated: 2015/02/05 13:18:45 by etheodor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,6 @@ void	ft_mallerr(void);
 void	draw_julia(t_env *e);
 void	draw_mandelbrot(t_env *e);
 void	draw_sierpinski(t_env *e);
+int		key_hook(int keycode, t_env *e);
 
 #endif
