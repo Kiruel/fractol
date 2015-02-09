@@ -30,4 +30,3 @@ void	ft_map_error(void)
 	ft_putendl_fd("map error", 2);
 	exit (2);
 }
-

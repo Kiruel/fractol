@@ -18,10 +18,12 @@
 # include <math.h>
 # include <stdlib.h>
 # include "../libft/includes/libft.h"
-# define DEFAUT_X 400
-# define DEFAUT_Y 300
+# define DEFAUT_X 400.0
+# define DEFAUT_Y 300.0
 # define DEFAUT_CRE -0.70176
 # define DEFAUT_CIM -0.3842
+# define DEFAUT_MAXITER 60.0
+# define C_ECH 2.0
 # define SPEED_TRANSLATE 0.05
 # define WHITE 0xFFFFFF
 
@@ -52,16 +54,18 @@ typedef struct 	s_env
 	double		cRe;
 	double		cIm;
 	int			how_window;
-    int			maxIterations;
+    int			iters;
 	int 		x;
 	int 		y;
 	int			i;
 	int			k;
+	int 		keycode;
+	int 		color;
 	t_ctr		ctr;
 }				t_env;
 
 void	ft_put_pixel_to_image(t_env *ret, int x, int y, int color);
-int		ft_update_img(t_env *ret, void f(t_env *ret));
+int		ft_update_img(t_env *ret);
 void	ft_map_error3(t_env *ret, int width);
 void	ft_close(int fd);
 void	ft_map_error2(char **value);
@@ -73,6 +77,11 @@ void	ft_mallerr(void);
 void	draw_julia(t_env *e);
 void	draw_mandelbrot(t_env *e);
 void	draw_sierpinski(t_env *e);
+void	draw_ship(t_env *e);
 int		key_hook(int keycode, t_env *e);
+void	ft_init_value(t_env *e);
+int		button_hook(int button, int x, int y, t_env *e);
+void	ft_frct(t_env *e);
+int		expose_hook(t_env *e);
 
 #endif

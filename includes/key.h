@@ -18,6 +18,10 @@
 # define KEY_R 114
 # define KEY_V 118
 # define KEY_M 109
+# define KEY_N 110
+// # define KEY_Z
+// # define KEY_X
+
 
 # define KEY_MORE 61
 # define KEY_LESS 45
