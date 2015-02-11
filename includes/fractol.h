@@ -6,7 +6,7 @@
 /*   By: etheodor <etheodor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/28 17:35:34 by etheodor          #+#    #+#             */
-/*   Updated: 2015/02/11 13:40:46 by etheodor         ###   ########.fr       */
+/*   Updated: 2015/02/11 17:29:09 by etheodor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdio.h>
 # include <math.h>
 # include <stdlib.h>
+# include <unistd.h>
 # include "../libft/includes/libft.h"
 # define DEFAUT_MAXITER 60.0
 # define C_ECH 2.0

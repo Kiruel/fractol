@@ -6,7 +6,7 @@
 /*   By: etheodor <etheodor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/28 17:40:39 by etheodor          #+#    #+#             */
-/*   Updated: 2015/02/11 14:17:17 by etheodor         ###   ########.fr       */
+/*   Updated: 2015/02/11 17:20:37 by etheodor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ int     motion_hook(int x, int y, t_env *e)
 	{
 		tmpRe = e->cRe;
 		tmpIm = e->cIm;
-		tmpRe = ((2 * (((double)x * C_ECH) / e->default_x )) / C_ECH) - 1;
-		tmpIm = ((2 * (((double)y * C_ECH) / e->default_y )) / C_ECH) - 1;
+		tmpRe = (((2 * (((double)x * C_ECH) / e->default_x )) / C_ECH) - 1) / e->zoom;
+		tmpIm = (((2 * (((double)y * C_ECH) / e->default_y )) / C_ECH) - 1) / e->zoom;
 		if (e->keycode != KEY_M)
 		{
 			if (tmpRe != e->cRe)
@@ -109,7 +109,7 @@ void	ft_frct(t_env *e)
 	}
 }
 
-int		main(int ac, char **av)
+void	ft_fractol(int ac, char **av)
 {
 	t_env	*e;
 
@@ -120,16 +120,21 @@ int		main(int ac, char **av)
 	if (ac == 4)
 	{
 		if (ft_error_win(e, av) == -1)
-			return (0);
+			exit(0);
 	}
 	else if (ac != 2)
 	{
 		ft_putendl_fd("Error : Usage: ./fracol [julia,mandel,multi]", 2);
-		return (0);
+		exit(0);
 	}
 	ft_init_value(e);
 	if (ft_find_frct(e, av[1]) == -1)
-		return (0);
+		exit(0);
 	ft_init_win(e);
+}
+
+int		main(int ac, char **av)
+{
+	ft_fractol(ac, av);
 	return (0);
 }

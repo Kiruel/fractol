@@ -6,7 +6,7 @@
 /*   By: etheodor <etheodor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/05 13:17:08 by etheodor          #+#    #+#             */
-/*   Updated: 2015/02/11 14:21:02 by etheodor         ###   ########.fr       */
+/*   Updated: 2015/02/11 15:07:21 by etheodor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,19 @@ void	ft_show_variable(t_env *e)
 	ft_putstr("\n");
 }
 
+void 	ft_key_hook3(int keycode, t_env *e)
+{
+	if (keycode == KEY_1_NUM)
+		e->l -= 0.1;
+	if (keycode == KEY_2_NUM)
+		e->l += 0.1;
+	if (keycode == KEY_STAR_NUM)
+		e->freq += 1;
+	if (keycode == KEY_SLACH_NUM)
+		e->freq -= 1;	
+	expose_hook(e);
+}
+
 void	ft_key_hook2(int keycode, t_env *e)
 {
 	if (keycode == KEY_MORE_NUM || keycode == KEY_MORE)
@@ -77,22 +90,45 @@ void	ft_key_hook2(int keycode, t_env *e)
 	if (keycode == KEY_9)
 		e->iters -= 10;
 	if (keycode == KEY_7_NUM)
+	{
+		if (e->rgb.r > 1)
+			e->rgb.r = 1;
 		e->rgb.r += 0.1;
+	}
 	if (keycode == KEY_8_NUM)
+	{
+		if (e->rgb.g > 1)
+			e->rgb.g = 1;
 		e->rgb.g += 0.1;
+	}
 	if (keycode == KEY_9_NUM)
+	{
+		if (e->rgb.b > 1)
+			e->rgb.b = 1;
 		e->rgb.b += 0.1;
+	}
 	if (keycode == KEY_4_NUM)
-		e->rgb.r -= 0.1;
+	{
+		if (e->rgb.r <= 0)
+			e->rgb.r = 0;
+		else
+			e->rgb.r -= 0.1;
+	}
 	if (keycode == KEY_5_NUM)
-		e->rgb.g -= 0.1;
+	{
+		if (e->rgb.g <= 0)
+			e->rgb.g = 0;
+		else
+			e->rgb.g -= 0.1;
+	}
 	if (keycode == KEY_6_NUM)
-		e->rgb.b -= 0.1;
-	if (keycode == KEY_1_NUM)
-		e->l += 0.1;
-	if (keycode == KEY_2_NUM)
-		e->l -= 0.1;
-	expose_hook(e);
+	{
+		if (e->rgb.b <= 0)
+			e->rgb.b = 0;
+		else
+			e->rgb.b -= 0.1;
+	}
+	ft_key_hook3(keycode, e);
 	// ft_putnbr(keycode);
 	// ft_putchar('\n');
 }

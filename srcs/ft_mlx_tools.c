@@ -6,7 +6,7 @@
 /*   By: etheodor <etheodor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/08 09:44:33 by etheodor          #+#    #+#             */
-/*   Updated: 2015/02/11 13:17:24 by etheodor         ###   ########.fr       */
+/*   Updated: 2015/02/11 17:29:13 by etheodor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,9 @@ int		ft_color(t_env *e)
 	double d;
 
 	d = ((double)e->i + 1.0 - log(log(sqrt(e->newRe * e->newRe + e->newIm * e->newIm))) / log(2));
-	if (e->i < 0 || e->i >= e->iters)
+	if (d <= 0)
+		d = 0.1;
+	if (d >= e->iters)
 		return (0);
 	d = ((int)d % 20) + (d - (int)d);
 	d /= 20;

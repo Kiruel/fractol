@@ -6,7 +6,7 @@
 /*   By: etheodor <etheodor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/04 10:39:25 by etheodor          #+#    #+#             */
-/*   Updated: 2015/02/11 13:53:13 by etheodor         ###   ########.fr       */
+/*   Updated: 2015/02/11 14:53:31 by etheodor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@
 # define KEY_DIV 65455
 # define KEY_MUP 65450
 
+# define KEY_SLACH_NUM 65455
+# define KEY_STAR_NUM 65450
 # define KEY_MORE_NUM 65451
 # define KEY_LESS_NUM 65453
 # define KEY_0_NUM 65456
