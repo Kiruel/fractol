@@ -6,7 +6,7 @@
 /*   By: etheodor <etheodor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/04 12:29:59 by etheodor          #+#    #+#             */
-/*   Updated: 2015/02/11 11:02:29 by etheodor         ###   ########.fr       */
+/*   Updated: 2015/02/11 13:16:51 by etheodor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ void	draw_sierpinski(t_env *e)
 
 void	draw_mandelbrot(t_env *e)
 {
-	e->pr = 1.5 * (e->x - DEFAUT_X / 2) / (0.5 * e->zoom * DEFAUT_X) + e->moveX;
-	e->pi = (e->y - DEFAUT_Y / 2) / (0.5 * e->zoom * DEFAUT_Y) + e->moveY;
+	e->pr = 1.5 * (e->x - e->default_x / 2) / (0.5 * e->zoom * e->default_x) + e->moveX;
+	e->pi = (e->y - e->default_y / 2) / (0.5 * e->zoom * e->default_y) + e->moveY;
 	e->newRe = 0;
 	e->newIm = 0;
 	e->oldRe = 0;
@@ -46,8 +46,8 @@ void	draw_mandelbrot(t_env *e)
 
 void	draw_ship(t_env *e)
 {
-	e->pr = 1.5 * (e->x - DEFAUT_X / 2) / (0.5 * e->zoom * DEFAUT_X) + e->moveX;
-	e->pi = (e->y - DEFAUT_Y / 2) / (0.5 * e->zoom * DEFAUT_Y) + e->moveY;
+	e->pr = 1.5 * (e->x - e->default_x / 2) / (0.5 * e->zoom * e->default_x) + e->moveX;
+	e->pi = (e->y - e->default_y / 2) / (0.5 * e->zoom * e->default_y) + e->moveY;
 	e->newRe = 0;
 	e->newIm = 0;
 	e->oldRe = 0;
@@ -66,8 +66,8 @@ void	draw_ship(t_env *e)
 
 void	draw_julia(t_env *e)
 {
-	e->newRe = 1.5 * (e->x - DEFAUT_X / 2) / (0.5 * e->zoom * DEFAUT_X) + e->moveX;
-	e->newIm = (e->y - DEFAUT_Y / 2) / (0.5 * e->zoom * DEFAUT_Y) + e->moveY;
+	e->newRe = 1.5 * (e->x - e->default_x / 2) / (0.5 * e->zoom * e->default_x) + e->moveX;
+	e->newIm = (e->y - e->default_y / 2) / (0.5 * e->zoom * e->default_y) + e->moveY;
 	e->i = 0;
 	while (e->i < e->iters)
 	{

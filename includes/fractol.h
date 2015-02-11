@@ -6,7 +6,7 @@
 /*   By: etheodor <etheodor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/28 17:35:34 by etheodor          #+#    #+#             */
-/*   Updated: 2015/02/11 10:48:59 by etheodor         ###   ########.fr       */
+/*   Updated: 2015/02/11 13:40:46 by etheodor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,6 @@
 # include <math.h>
 # include <stdlib.h>
 # include "../libft/includes/libft.h"
-# define DEFAUT_X 400.0
-# define DEFAUT_Y 300.0
-# define DEFAUT_CRE -0.70176
-# define DEFAUT_CIM -0.3842
 # define DEFAUT_MAXITER 60.0
 # define C_ECH 2.0
 # define SPEED_TRANSLATE 0.05
@@ -32,6 +28,13 @@ typedef	struct 	s_ctr
 	int			x;
 	int			y;
 }				t_ctr;
+
+typedef struct 	s_rgb
+{
+	float 		r;
+	float		g;
+	float 		b;
+}				t_rgb;
 
 typedef struct 	s_env
 {
@@ -66,6 +69,9 @@ typedef struct 	s_env
 	int 		keycode;
 	int 		color;
 	double		tmpre;
+	double 		default_x;
+	double 		default_y;
+	t_rgb		rgb;
 	t_ctr		ctr;
 }				t_env;
 
@@ -91,5 +97,6 @@ void	ft_frct(t_env *e);
 int		expose_hook(t_env *e);
 void	draw_multi(t_env *e);
 int		ft_color(t_env *e);
+int		ft_error_win(t_env *e, char **av);
 
 #endif

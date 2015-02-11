@@ -6,7 +6,7 @@
 /*   By: etheodor <etheodor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/08 09:44:33 by etheodor          #+#    #+#             */
-/*   Updated: 2015/02/11 10:44:40 by etheodor         ###   ########.fr       */
+/*   Updated: 2015/02/11 13:17:24 by etheodor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ static int		color_scale(double d, t_env *e)
 	if (d < 0 || d > 1)
 		return (0);
 	res = 0;
-	res += color_scale_c(d, e->freq, 1);
+	res += color_scale_c(d, e->freq, e->rgb.r);
 	res = res << 8;
-	res += color_scale_c(d, e->freq, 1);
+	res += color_scale_c(d, e->freq, e->rgb.g);
 	res = res << 8;
-	res += color_scale_c(d, e->freq, 0.8);
+	res += color_scale_c(d, e->freq, e->rgb.b);
 	return (res);
 }
 
@@ -57,7 +57,7 @@ void	ft_put_pixel_to_image(t_env *ret, int x, int y, int color)
 
 int		ft_update_img(t_env *ret)
 {
-	ret->img = mlx_new_image(ret->mlx, DEFAUT_X, DEFAUT_Y);
+	ret->img = mlx_new_image(ret->mlx, ret->default_x, ret->default_y);
 	ret->pimg = mlx_get_data_addr(ret->img, &(ret->bpp),
 			&(ret->size_line), &(ret->endian));
 	ft_frct(ret);
