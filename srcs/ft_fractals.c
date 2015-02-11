@@ -6,7 +6,7 @@
 /*   By: etheodor <etheodor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/04 12:29:59 by etheodor          #+#    #+#             */
-/*   Updated: 2015/02/04 12:30:41 by etheodor         ###   ########.fr       */
+/*   Updated: 2015/02/11 11:02:29 by etheodor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,10 @@ void	draw_mandelbrot(t_env *e)
 {
 	e->pr = 1.5 * (e->x - DEFAUT_X / 2) / (0.5 * e->zoom * DEFAUT_X) + e->moveX;
 	e->pi = (e->y - DEFAUT_Y / 2) / (0.5 * e->zoom * DEFAUT_Y) + e->moveY;
-	e->newRe = e->newIm = e->oldRe = e->oldIm = 0;
+	e->newRe = 0;
+	e->newIm = 0;
+	e->oldRe = 0;
+	e->oldIm = 0;
 	e->i = 0;
 	while (e->i < e->iters)
 	{
@@ -36,7 +39,7 @@ void	draw_mandelbrot(t_env *e)
 		e->oldIm = e->newIm;
 		e->newRe = e->oldRe * e->oldRe - e->oldIm * e->oldIm + e->pr;
 		e->newIm = 2 * e->oldRe * e->oldIm + e->pi;
-		if((e->newRe * e->newRe + e->newIm * e->newIm) > 4) break;
+		if((e->newRe * e->newRe + e->newIm * e->newIm) > e->l) break;
 		e->i++;
 	}
 }
@@ -45,7 +48,10 @@ void	draw_ship(t_env *e)
 {
 	e->pr = 1.5 * (e->x - DEFAUT_X / 2) / (0.5 * e->zoom * DEFAUT_X) + e->moveX;
 	e->pi = (e->y - DEFAUT_Y / 2) / (0.5 * e->zoom * DEFAUT_Y) + e->moveY;
-	e->newRe = e->newIm = e->oldRe = e->oldIm = 0;
+	e->newRe = 0;
+	e->newIm = 0;
+	e->oldRe = 0;
+	e->oldIm = 0;
 	e->i = 0;
 	while (e->i < e->iters)
 	{
@@ -53,7 +59,7 @@ void	draw_ship(t_env *e)
 		e->oldIm = e->newIm;
 		e->newRe = e->oldRe * e->oldRe - e->oldIm * e->oldIm - e->pr;
 		e->newIm = 2 * fabs(e->oldRe) * fabs(e->oldIm) + e->pi;
-		if((e->newRe * e->newRe + e->newIm * e->newIm) > 4) break;
+		if((e->newRe * e->newRe + e->newIm * e->newIm) > e->l) break;
 		e->i++;
 	}
 }
@@ -69,30 +75,25 @@ void	draw_julia(t_env *e)
 		e->oldIm = e->newIm;
 		e->newRe = e->oldRe * e->oldRe - e->oldIm * e->oldIm + e->cRe;
 		e->newIm = 2 * e->oldRe * e->oldIm + e->cIm;
-		if((e->newRe * e->newRe + e->newIm * e->newIm) > 4 ) break;				
+		if((e->newRe * e->newRe + e->newIm * e->newIm) > e->l) break;
 		e->i++;
 	}
 }
 
 void	draw_multi(t_env *e)
-{
-	e->pr = 1.5 * (e->x - DEFAUT_X / 2) / (0.5 * e->zoom * DEFAUT_X) + e->moveX;
-	e->pi = (e->y - DEFAUT_Y / 2) / (0.5 * e->zoom * DEFAUT_Y) + e->moveY;
+{	
+	e->newRe = 0 + e->pr;
+	e->newIm = 0 + e->pi;
 	e->i = 0;
 	while (e->i < e->iters)
 	{
 		e->oldRe = e->newRe;
 		e->oldIm = e->newIm;
-		e->newRe = (((e->oldRe * e->oldRe) - (e->oldIm * e->oldIm)) / (((e->oldRe
-			* e->oldRe) - (e->oldIm * e->oldIm)) * ((e->oldRe * e->oldRe) -
-		(e->oldIm * e->oldIm)) + 4.0 * (e->oldRe * e->oldRe) * (e->oldIm *
-		e->oldIm ))) + e->pr;
-		e->newIm = ((-2.0 * e->oldRe * e->oldIm) / (((e->oldRe * e->oldRe) -
-			(e->oldIm * e->oldIm)) * ((e->oldRe * e->oldRe) - (e->oldIm *
-				e->oldIm)) + 4.0 * (e->oldRe * e->oldRe) * (e->oldIm *
-			e->oldIm ))) + e->pi;
-		if((e->newRe * e->newRe + e->newIm * e->newIm) > 4 ) break;
+		e->tmpre = pow((e->oldRe * e->oldRe) - (e->oldIm * e->oldIm), 2.0) + 4.0 * e->oldRe * e->oldRe * e->oldIm * e->oldIm;
+		e->newRe = (((e->oldRe * e->oldRe) - (e->oldIm * e->oldIm)) / e->tmpre) + e->pr;
+		e->newIm = ((-2.0 * e->oldRe * e->oldIm) / e->tmpre) + e->pi;
+		if((e->newRe * e->newRe + e->newIm * e->newIm) > e->l)
+			break;
 		e->i++;
 	}
 }
-

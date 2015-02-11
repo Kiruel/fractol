@@ -6,7 +6,7 @@
 /*   By: etheodor <etheodor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/28 17:40:39 by etheodor          #+#    #+#             */
-/*   Updated: 2015/02/05 13:18:28 by etheodor         ###   ########.fr       */
+/*   Updated: 2015/02/11 11:05:04 by etheodor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,13 +98,10 @@ void	ft_frct(t_env *e)
 		e->y = 0;
 		while (e->y < DEFAUT_Y)
 		{
+			e->pr = 1.5 * (e->x - DEFAUT_X / 2) / (0.5 * e->zoom * DEFAUT_X) + e->moveX;
+			e->pi = (e->y - DEFAUT_Y / 2) / (0.5 * e->zoom * DEFAUT_Y) + e->moveY;
 			ft_draw_frct(e);
-			if (e->how_window == 0)
-				ft_put_pixel_to_image(e, e->x, e->y, WHITE * e->i);
-			else if (e->how_window == 3)
-				ft_put_pixel_to_image(e, e->x, e->y, ft_rgbtoint(((255 * e->i) / e->iters), ((255 * e->i) / e->iters), ((255 * e->i) /e->iters)));	
-			else
-				ft_put_pixel_to_image(e, e->x, e->y, 0x0F << e->i);
+			ft_put_pixel_to_image(e, e->x, e->y, ft_color(e));
 			e->y++;
 		}
 		e->x++;
@@ -114,9 +111,7 @@ void	ft_frct(t_env *e)
 int		main(int ac, char **av)
 {
 	t_env	*e;
-	int i;
 
-	i = 0;
 	if (ac == 2)
 	{
 		if ((e = (t_env*)ft_memalloc(sizeof(t_env))) == NULL)
@@ -127,6 +122,6 @@ int		main(int ac, char **av)
 		ft_init_win(e);
 	}
 	else
-		ft_putendl_fd("Error : Usage: ./fracol [julia,mandel,sierp]", 2);
+		ft_putendl_fd("Error : Usage: ./fracol [julia,mandel,sierp,multi]", 2);
 	return (0);
 }

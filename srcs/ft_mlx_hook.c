@@ -6,7 +6,7 @@
 /*   By: etheodor <etheodor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/05 13:17:08 by etheodor          #+#    #+#             */
-/*   Updated: 2015/02/05 13:18:13 by etheodor         ###   ########.fr       */
+/*   Updated: 2015/02/11 10:53:24 by etheodor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	ft_init_value(t_env *e)
 {
+	e->l = 16;
+	e->freq = 1;
 	e->keycode = 0;
 	e->ctr.x = DEFAUT_X / 2;
 	e->ctr.y = DEFAUT_Y / 2;
@@ -96,8 +98,6 @@ int		key_hook(int keycode, t_env *e)
 		e->how_window = 3;
 	if (keycode == KEY_5)
 		e->how_window = 4;
-	if (keycode == KEY_6)
-		e->how_window = 5;
 	if (keycode == KEY_RIGHT)
 		e->moveX -= (SPEED_TRANSLATE / e->zoom);
 	if (keycode == KEY_LEFT)

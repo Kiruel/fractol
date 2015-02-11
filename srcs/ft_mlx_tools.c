@@ -6,11 +6,44 @@
 /*   By: etheodor <etheodor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/08 09:44:33 by etheodor          #+#    #+#             */
-/*   Updated: 2015/02/04 12:40:09 by etheodor         ###   ########.fr       */
+/*   Updated: 2015/02/11 10:44:40 by etheodor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+
+static int		color_scale_c(double d, double freq, double phase)
+{
+	return ((int)(127.5 * (1 - cos(freq * 2 * M_PI* (d + phase)))));
+}
+
+static int		color_scale(double d, t_env *e)
+{
+	int res;
+
+	if (d < 0 || d > 1)
+		return (0);
+	res = 0;
+	res += color_scale_c(d, e->freq, 1);
+	res = res << 8;
+	res += color_scale_c(d, e->freq, 1);
+	res = res << 8;
+	res += color_scale_c(d, e->freq, 0.8);
+	return (res);
+}
+
+int		ft_color(t_env *e)
+{
+	double d;
+
+	d = ((double)e->i + 1.0 - log(log(sqrt(e->newRe * e->newRe + e->newIm * e->newIm))) / log(2));
+	if (e->i < 0 || e->i >= e->iters)
+		return (0);
+	d = ((int)d % 20) + (d - (int)d);
+	d /= 20;
+	return (color_scale(d, e));
+}
 
 void	ft_put_pixel_to_image(t_env *ret, int x, int y, int color)
 {

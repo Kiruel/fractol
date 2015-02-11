@@ -6,7 +6,7 @@
 /*   By: etheodor <etheodor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/28 17:35:34 by etheodor          #+#    #+#             */
-/*   Updated: 2015/02/05 13:18:45 by etheodor         ###   ########.fr       */
+/*   Updated: 2015/02/11 10:48:59 by etheodor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ typedef struct 	s_env
     double		moveY;
 	double		cRe;
 	double		cIm;
+	double 		freq;
+	float  		l;
 	int			how_window;
     int			iters;
 	int 		x;
@@ -63,6 +65,7 @@ typedef struct 	s_env
 	int			k;
 	int 		keycode;
 	int 		color;
+	double		tmpre;
 	t_ctr		ctr;
 }				t_env;
 
@@ -87,5 +90,6 @@ int		button_hook(int button, int x, int y, t_env *e);
 void	ft_frct(t_env *e);
 int		expose_hook(t_env *e);
 void	draw_multi(t_env *e);
+int		ft_color(t_env *e);
 
 #endif
