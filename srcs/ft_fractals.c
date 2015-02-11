@@ -36,8 +36,7 @@ void	draw_mandelbrot(t_env *e)
 		e->oldIm = e->newIm;
 		e->newRe = e->oldRe * e->oldRe - e->oldIm * e->oldIm + e->pr;
 		e->newIm = 2 * e->oldRe * e->oldIm + e->pi;
-		if((e->newRe * e->newRe + e->newIm * e->newIm) > 4) 
-			break;
+		if((e->newRe * e->newRe + e->newIm * e->newIm) > 4) break;
 		e->i++;
 	}
 }
@@ -54,13 +53,12 @@ void	draw_ship(t_env *e)
 		e->oldIm = e->newIm;
 		e->newRe = e->oldRe * e->oldRe - e->oldIm * e->oldIm - e->pr;
 		e->newIm = 2 * fabs(e->oldRe) * fabs(e->oldIm) + e->pi;
-		if((e->newRe * e->newRe + e->newIm * e->newIm) > 4) 
-			break;
+		if((e->newRe * e->newRe + e->newIm * e->newIm) > 4) break;
 		e->i++;
 	}
 }
 
-void		draw_julia(t_env *e)
+void	draw_julia(t_env *e)
 {
 	e->newRe = 1.5 * (e->x - DEFAUT_X / 2) / (0.5 * e->zoom * DEFAUT_X) + e->moveX;
 	e->newIm = (e->y - DEFAUT_Y / 2) / (0.5 * e->zoom * DEFAUT_Y) + e->moveY;
@@ -75,3 +73,26 @@ void		draw_julia(t_env *e)
 		e->i++;
 	}
 }
+
+void	draw_multi(t_env *e)
+{
+	e->pr = 1.5 * (e->x - DEFAUT_X / 2) / (0.5 * e->zoom * DEFAUT_X) + e->moveX;
+	e->pi = (e->y - DEFAUT_Y / 2) / (0.5 * e->zoom * DEFAUT_Y) + e->moveY;
+	e->i = 0;
+	while (e->i < e->iters)
+	{
+		e->oldRe = e->newRe;
+		e->oldIm = e->newIm;
+		e->newRe = (((e->oldRe * e->oldRe) - (e->oldIm * e->oldIm)) / (((e->oldRe
+			* e->oldRe) - (e->oldIm * e->oldIm)) * ((e->oldRe * e->oldRe) -
+		(e->oldIm * e->oldIm)) + 4.0 * (e->oldRe * e->oldRe) * (e->oldIm *
+		e->oldIm ))) + e->pr;
+		e->newIm = ((-2.0 * e->oldRe * e->oldIm) / (((e->oldRe * e->oldRe) -
+			(e->oldIm * e->oldIm)) * ((e->oldRe * e->oldRe) - (e->oldIm *
+				e->oldIm)) + 4.0 * (e->oldRe * e->oldRe) * (e->oldIm *
+			e->oldIm ))) + e->pi;
+		if((e->newRe * e->newRe + e->newIm * e->newIm) > 4 ) break;
+		e->i++;
+	}
+}
+

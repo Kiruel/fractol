@@ -48,6 +48,8 @@ typedef struct 	s_env
     double		newIm;
     double		oldRe;
     double		oldIm;
+    double		bigoldRe;
+    double		bigoldIm;
     long double		zoom;
     double		moveX;
     double		moveY;
@@ -78,10 +80,12 @@ void	draw_julia(t_env *e);
 void	draw_mandelbrot(t_env *e);
 void	draw_sierpinski(t_env *e);
 void	draw_ship(t_env *e);
+void	draw_phoenix(t_env *e);
 int		key_hook(int keycode, t_env *e);
 void	ft_init_value(t_env *e);
 int		button_hook(int button, int x, int y, t_env *e);
 void	ft_frct(t_env *e);
 int		expose_hook(t_env *e);
+void	draw_multi(t_env *e);
 
 #endif

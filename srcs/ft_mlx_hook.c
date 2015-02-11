@@ -94,6 +94,10 @@ int		key_hook(int keycode, t_env *e)
 		e->how_window = 2;
 	if (keycode == KEY_4)
 		e->how_window = 3;
+	if (keycode == KEY_5)
+		e->how_window = 4;
+	if (keycode == KEY_6)
+		e->how_window = 5;
 	if (keycode == KEY_RIGHT)
 		e->moveX -= (SPEED_TRANSLATE / e->zoom);
 	if (keycode == KEY_LEFT)

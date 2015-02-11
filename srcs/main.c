@@ -59,6 +59,8 @@ int		ft_find_frct(t_env *e, char *str)
 		e->how_window = 1;
 	else if (!ft_strcmp(str, "sierp"))
 		e->how_window = 0;
+	else if (!ft_strcmp(str, "multi"))
+		e->how_window = 4;
 	else
 	{
 		ft_error("fractal name");
@@ -71,12 +73,14 @@ void	ft_draw_frct(t_env *e)
 {
 	if (e->how_window == 0)
 		draw_sierpinski(e);
-	if (e->how_window == 1)
+	else if (e->how_window == 1)
 		draw_mandelbrot(e);
-	if (e->how_window == 2)
+	else if (e->how_window == 2)
 		draw_julia(e);
-	if (e->how_window == 3)
+	else if (e->how_window == 3)
 		draw_ship(e);
+	else if (e->how_window == 4)
+		draw_multi(e);
 }
 
 int 	ft_rgbtoint(int r, int g, int b)
@@ -98,7 +102,7 @@ void	ft_frct(t_env *e)
 			if (e->how_window == 0)
 				ft_put_pixel_to_image(e, e->x, e->y, WHITE * e->i);
 			else if (e->how_window == 3)
-				ft_put_pixel_to_image(e, e->x, e->y, ft_rgbtoint(((255 * e->i) / e->iters), ((255 * e->i) / e->iters), ((255 * e->i) /e->iters)));
+				ft_put_pixel_to_image(e, e->x, e->y, ft_rgbtoint(((255 * e->i) / e->iters), ((255 * e->i) / e->iters), ((255 * e->i) /e->iters)));	
 			else
 				ft_put_pixel_to_image(e, e->x, e->y, 0x0F << e->i);
 			e->y++;
