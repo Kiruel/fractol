@@ -30,7 +30,7 @@ void	ft_init_value2(t_env *e)
 		e->zoom = 0.6;
 		e->moveX = 0;
 		e->moveY = 0;
-		e->l = 200;
+		e->l = 10;
 	}
 	else
 	{

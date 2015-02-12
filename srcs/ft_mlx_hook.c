@@ -27,7 +27,6 @@ void	ft_show_variable(t_env *e)
 	ft_putstr("| Im : ");
 	ft_putnbr(e->cIm);
 	ft_putstr("\n");
-	printf("x : %f\ny : %f\nzoom : %Lf\n", e->moveX, e->moveY, e->zoom);
 }
 
 void 	ft_key_hook4(int keycode, t_env *e)
@@ -40,9 +39,9 @@ void 	ft_key_hook4(int keycode, t_env *e)
 			e->rgb.b -= 0.1;
 	}
 	if (keycode == KEY_1_NUM)
-		e->l -= 10;
+		e->l -= 1;
 	if (keycode == KEY_2_NUM)
-		e->l += 10;
+		e->l += 1;
 	if (keycode == KEY_STAR_NUM)
 		e->freq += 1;
 	if (keycode == KEY_SLACH_NUM)
@@ -51,7 +50,6 @@ void 	ft_key_hook4(int keycode, t_env *e)
 		e->how_window = 3;
 	if (keycode == KEY_5)
 		e->how_window = 4;
-
 	expose_hook(e);
 }
 

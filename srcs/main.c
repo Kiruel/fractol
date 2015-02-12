@@ -15,33 +15,6 @@
 int		expose_hook(t_env *e)
 {
 	ft_update_img(e);
-	mlx_pixel_put(e->mlx, e->win, e->default_x / 2, e->default_y / 2, 0xFF0000);
-	mlx_pixel_put(e->mlx, e->win, e->default_x / 2 + 1, e->default_y / 2, 0xFF0000);
-	mlx_pixel_put(e->mlx, e->win, e->default_x / 2, e->default_y / 2 + 1, 0xFF0000);
-	mlx_pixel_put(e->mlx, e->win, e->default_x / 2 + 1, e->default_y / 2 + 1, 0xFF0000);
-	return (0);
-}
-
-int     motion_hook(int x, int y, t_env *e)
-{
-	double tmpRe;
-	double tmpIm;
-	
-	if (e->how_window == 2)
-	{
-		tmpRe = e->cRe;
-		tmpIm = e->cIm;
-		tmpRe = (((2 * (((double)x * C_ECH) / e->default_x )) / C_ECH) - 1) / e->zoom;
-		tmpIm = (((2 * (((double)y * C_ECH) / e->default_y )) / C_ECH) - 1) / e->zoom;
-		if (e->keycode != KEY_M)
-		{
-			if (tmpRe != e->cRe)
-				e->cRe = tmpRe;
-			if (tmpIm != e->cIm)
-				e->cIm = tmpIm;
-			expose_hook(e);
-		}		
-	}
 	return (0);
 }
 

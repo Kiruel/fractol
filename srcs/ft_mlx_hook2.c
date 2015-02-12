@@ -12,6 +12,29 @@
 
 #include "fractol.h"
 
+int     motion_hook(int x, int y, t_env *e)
+{
+	double tmpRe;
+	double tmpIm;
+	
+	if (e->how_window == 2)
+	{
+		tmpRe = e->cRe;
+		tmpIm = e->cIm;
+		tmpRe = (((2 * (((double)x * C_ECH) / e->default_x )) / C_ECH) - 1) / e->zoom;
+		tmpIm = (((2 * (((double)y * C_ECH) / e->default_y )) / C_ECH) - 1) / e->zoom;
+		if (e->keycode != KEY_M)
+		{
+			if (tmpRe != e->cRe)
+				e->cRe = tmpRe;
+			if (tmpIm != e->cIm)
+				e->cIm = tmpIm;
+			expose_hook(e);
+		}		
+	}
+	return (0);
+}
+
 void	ft_zoom_mouse(double zoom, int x, int y, t_env *e)
 {
 	long double	p_x;
@@ -20,8 +43,8 @@ void	ft_zoom_mouse(double zoom, int x, int y, t_env *e)
 	(void)zoom;
 	p_x = (double)x / (double)e->default_x;
 	p_y = (double)y / (double)e->default_y;
-	e->moveX -= (p_x * -3.75 + 1.875);
-	e->moveY -= (p_y * -2.5 + 1.25);
+	e->moveX -= p_x * (-3.75 / e->zoom) + (1.875 / e->zoom);
+	e->moveY -= p_y * (-2.5 / e->zoom) + (1.25 / e->zoom);
 	e->zoom *= zoom;
 	expose_hook(e);
 }
