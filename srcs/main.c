@@ -6,7 +6,7 @@
 /*   By: etheodor <etheodor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/28 17:40:39 by etheodor          #+#    #+#             */
-/*   Updated: 2015/02/11 17:20:37 by etheodor         ###   ########.fr       */
+/*   Updated: 2015/02/12 15:17:47 by etheodor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,9 +127,9 @@ void	ft_fractol(int ac, char **av)
 		ft_putendl_fd("Error : Usage: ./fracol [julia,mandel,multi]", 2);
 		exit(0);
 	}
-	ft_init_value(e);
 	if (ft_find_frct(e, av[1]) == -1)
 		exit(0);
+	ft_init_value(e);
 	ft_init_win(e);
 }
 

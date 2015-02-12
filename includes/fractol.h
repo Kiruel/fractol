@@ -6,7 +6,7 @@
 /*   By: etheodor <etheodor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/28 17:35:34 by etheodor          #+#    #+#             */
-/*   Updated: 2015/02/11 17:29:09 by etheodor         ###   ########.fr       */
+/*   Updated: 2015/02/12 11:14:52 by etheodor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,5 +99,6 @@ int		expose_hook(t_env *e);
 void	draw_multi(t_env *e);
 int		ft_color(t_env *e);
 int		ft_error_win(t_env *e, char **av);
+void	ft_init_value2(t_env *e);
 
 #endif

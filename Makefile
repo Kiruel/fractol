@@ -24,7 +24,8 @@ SOURCE = ./srcs/main.c \
 		./srcs/ft_error2.c \
 		./srcs/ft_fractals.c \
 		./srcs/ft_mlx_hook.c \
-		./srcs/ft_mlx_hook2.c
+		./srcs/ft_mlx_hook2.c \
+		./srcs/ft_mlx_tools2.c
 
 POINTO = main.o \
 		ft_mlx_tools.o \
@@ -32,7 +33,8 @@ POINTO = main.o \
 		ft_error2.o \
 		ft_fractals.o \
 		ft_mlx_hook.o \
-		ft_mlx_hook2.o
+		ft_mlx_hook2.o \
+		ft_mlx_tools2.o
 
 all: $(NAME)
 	@echo "all: OK"

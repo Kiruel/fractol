@@ -6,42 +6,11 @@
 /*   By: etheodor <etheodor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/05 13:17:08 by etheodor          #+#    #+#             */
-/*   Updated: 2015/02/11 15:07:21 by etheodor         ###   ########.fr       */
+/*   Updated: 2015/02/12 15:13:47 by etheodor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-
-void	ft_init_value(t_env *e)
-{
-	e->rgb.r = 0.2;
-	e->rgb.g = 0.4;
-	e->rgb.b = 0.8;
-	e->l = 8;
-	e->freq = 1;
-	e->keycode = 0;
-	e->ctr.x = e->default_x / 2;
-	e->ctr.y = e->default_y / 2;
-	e->cRe = -0.70176;
-	e->cIm = -0.3842;
-	if (e->how_window == 1)
-	{
-		e->moveX = -0.5;
-		e->moveY = 0;				
-	}
-	else if (e->how_window == 3)
-	{
-		e->moveX = 0.5;
-		e->moveY = -0.5;
-	}
-	else
-	{
-		e->moveX = 0;
-		e->moveY = 0;
-	}
-	e->zoom = 0.8;
-	e->iters = DEFAUT_MAXITER;
-}
 
 void	ft_show_variable(t_env *e)
 {
@@ -60,47 +29,34 @@ void	ft_show_variable(t_env *e)
 	ft_putstr("\n");
 }
 
-void 	ft_key_hook3(int keycode, t_env *e)
+void 	ft_key_hook4(int keycode, t_env *e)
 {
+	if (keycode == KEY_6_NUM)
+	{
+		if (e->rgb.b <= 0)
+			e->rgb.b = 0;
+		else
+			e->rgb.b -= 0.1;
+	}
 	if (keycode == KEY_1_NUM)
-		e->l -= 0.1;
+		e->l -= 10;
 	if (keycode == KEY_2_NUM)
-		e->l += 0.1;
+		e->l += 10;
 	if (keycode == KEY_STAR_NUM)
 		e->freq += 1;
 	if (keycode == KEY_SLACH_NUM)
-		e->freq -= 1;	
+		e->freq -= 1;
+	if (keycode == KEY_4)
+		e->how_window = 3;
+	if (keycode == KEY_5)
+		e->how_window = 4;
+	printf("x : %f\n", e->moveX);
+	printf("y : %f\n", e->moveY);
 	expose_hook(e);
 }
 
-void	ft_key_hook2(int keycode, t_env *e)
+void 	ft_key_hook3(int keycode, t_env *e)
 {
-	if (keycode == KEY_MORE_NUM || keycode == KEY_MORE)
-		e->zoom *= 1.5;
-	if (keycode == KEY_M)
-		e->keycode = keycode;
-	else if (keycode == KEY_N)
-		e->keycode = keycode;
-	if (keycode == KEY_LESS_NUM || keycode == KEY_LESS)
-		e->zoom /= 1.5;
-	if (keycode == KEY_R)
-		ft_init_value(e);
-	if (keycode == KEY_0)
-		e->iters += 10;
-	if (keycode == KEY_9)
-		e->iters -= 10;
-	if (keycode == KEY_7_NUM)
-	{
-		if (e->rgb.r > 1)
-			e->rgb.r = 1;
-		e->rgb.r += 0.1;
-	}
-	if (keycode == KEY_8_NUM)
-	{
-		if (e->rgb.g > 1)
-			e->rgb.g = 1;
-		e->rgb.g += 0.1;
-	}
 	if (keycode == KEY_9_NUM)
 	{
 		if (e->rgb.b > 1)
@@ -121,12 +77,36 @@ void	ft_key_hook2(int keycode, t_env *e)
 		else
 			e->rgb.g -= 0.1;
 	}
-	if (keycode == KEY_6_NUM)
+	if (keycode == KEY_9)
+		e->iters -= 10;
+	ft_key_hook4(keycode, e);
+}
+
+void	ft_key_hook2(int keycode, t_env *e)
+{
+	if (keycode == KEY_MORE_NUM || keycode == KEY_MORE)
+		e->zoom *= 1.5;
+	if (keycode == KEY_M)
+		e->keycode = keycode;
+	else if (keycode == KEY_N)
+		e->keycode = keycode;
+	if (keycode == KEY_LESS_NUM || keycode == KEY_LESS)
+		e->zoom /= 1.5;
+	if (keycode == KEY_R)
+		ft_init_value(e);
+	if (keycode == KEY_0)
+		e->iters += 10;
+	if (keycode == KEY_7_NUM)
 	{
-		if (e->rgb.b <= 0)
-			e->rgb.b = 0;
-		else
-			e->rgb.b -= 0.1;
+		if (e->rgb.r > 1)
+			e->rgb.r = 1;
+		e->rgb.r += 0.1;
+	}
+	if (keycode == KEY_8_NUM)
+	{
+		if (e->rgb.g > 1)
+			e->rgb.g = 1;
+		e->rgb.g += 0.1;
 	}
 	ft_key_hook3(keycode, e);
 	// ft_putnbr(keycode);
@@ -149,10 +129,6 @@ int		key_hook(int keycode, t_env *e)
 		e->how_window = 1;
 	if (keycode == KEY_3)
 		e->how_window = 2;
-	if (keycode == KEY_4)
-		e->how_window = 3;
-	if (keycode == KEY_5)
-		e->how_window = 4;
 	if (keycode == KEY_RIGHT)
 		e->moveX -= (SPEED_TRANSLATE / e->zoom);
 	if (keycode == KEY_LEFT)
