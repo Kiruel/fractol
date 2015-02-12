@@ -6,7 +6,7 @@
 /*   By: etheodor <etheodor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/28 17:40:39 by etheodor          #+#    #+#             */
-/*   Updated: 2015/02/12 15:17:47 by etheodor         ###   ########.fr       */
+/*   Updated: 2015/02/12 17:40:36 by etheodor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,10 @@
 int		expose_hook(t_env *e)
 {
 	ft_update_img(e);
+	mlx_pixel_put(e->mlx, e->win, e->default_x / 2, e->default_y / 2, 0xFF0000);
+	mlx_pixel_put(e->mlx, e->win, e->default_x / 2 + 1, e->default_y / 2, 0xFF0000);
+	mlx_pixel_put(e->mlx, e->win, e->default_x / 2, e->default_y / 2 + 1, 0xFF0000);
+	mlx_pixel_put(e->mlx, e->win, e->default_x / 2 + 1, e->default_y / 2 + 1, 0xFF0000);
 	return (0);
 }
 

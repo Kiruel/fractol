@@ -14,6 +14,8 @@ NAME = fractol
 
 CFLAG = -Wall -Werror -Wextra -I ./includes
 
+CC= cc
+
 MINILIBX = -L/usr/x11/lib -lmlx -lXext -lX11
 
 LIBFT = ./libft/includes
@@ -43,13 +45,13 @@ $(NAME):
 	@make -C libft/ fclean
 	@make -C libft
 	@make -C libft/ clean
-	@gcc -c -g $(CFLAG) $(SOURCE) -I $(LIBFT)
-	@gcc $(CFLAG) -o $(NAME) $(POINTO) ./libft/libft.a -L/usr/x11/lib -lmlx -lXext -lX11
+	@cc -c -g $(CFLAG) $(SOURCE) -I $(LIBFT)
+	@cc $(CFLAG) -o $(NAME) $(POINTO) ./libft/libft.a -L/usr/x11/lib -lmlx -lXext -lX11
 	@make clean
 
 test:
-	@gcc -c -g $(CFLAG) $(SOURCE)
-	@gcc $(CFLAG) -o $(NAME) $(POINTO) ./libft/libft.a -L/usr/x11/lib -lmlx -lXext -lX11
+	@cc -c -g $(CFLAG) $(SOURCE)
+	@cc $(CFLAG) -o $(NAME) $(POINTO) ./libft/libft.a -L/usr/x11/lib -lmlx -lXext -lX11
 	@make clean
 	@echo "test: OK"
 
