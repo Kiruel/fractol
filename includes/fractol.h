@@ -101,5 +101,7 @@ int		ft_color(t_env *e);
 int		ft_error_win(t_env *e, char **av);
 void	ft_init_value2(t_env *e);
 int     motion_hook(int x, int y, t_env *e);
+void	ft_frct(t_env *e);
+int		expose_hook(t_env *e);
 
 #endif
