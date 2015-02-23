@@ -6,16 +6,15 @@
 /*   By: etheodor <etheodor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/08 09:44:33 by etheodor          #+#    #+#             */
-/*   Updated: 2015/02/11 17:29:13 by etheodor         ###   ########.fr       */
+/*   Updated: 2015/02/14 10:48:19 by etheodor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-
 static int		color_scale_c(double d, double freq, double phase)
 {
-	return ((int)(127.5 * (1 - cos(freq * 2 * M_PI* (d + phase)))));
+	return ((int)(127.5 * (1 - cos(freq * 2 * M_PI * (d + phase)))));
 }
 
 static int		color_scale(double d, t_env *e)
@@ -33,11 +32,12 @@ static int		color_scale(double d, t_env *e)
 	return (res);
 }
 
-int		ft_color(t_env *e)
+int				ft_color(t_env *e)
 {
 	double d;
 
-	d = ((double)e->i + 1.0 - log(log(sqrt(e->newRe * e->newRe + e->newIm * e->newIm))) / log(2));
+	d = ((double)e->i + 1.0 - log(log(sqrt(e->newre * e->newre + e->newim *
+		e->newim))) / log(2));
 	if (d <= 0)
 		d = 0.1;
 	if (d >= e->iters)
@@ -47,7 +47,7 @@ int		ft_color(t_env *e)
 	return (color_scale(d, e));
 }
 
-void	ft_put_pixel_to_image(t_env *ret, int x, int y, int color)
+void			ft_put_pixel_to_image(t_env *ret, int x, int y, int color)
 {
 	int i;
 
@@ -57,7 +57,7 @@ void	ft_put_pixel_to_image(t_env *ret, int x, int y, int color)
 	ret->pimg[i + 2] = (color & 0xFF0000) >> 16;
 }
 
-int		ft_update_img(t_env *ret)
+int				ft_update_img(t_env *ret)
 {
 	ret->img = mlx_new_image(ret->mlx, ret->default_x, ret->default_y);
 	ret->pimg = mlx_get_data_addr(ret->img, &(ret->bpp),

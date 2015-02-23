@@ -6,7 +6,7 @@
 /*   By: etheodor <etheodor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/05 13:17:08 by etheodor          #+#    #+#             */
-/*   Updated: 2015/02/12 17:01:33 by etheodor         ###   ########.fr       */
+/*   Updated: 2015/02/23 11:18:00 by etheodor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,14 @@ void	ft_show_variable(t_env *e)
 	ft_putnbr(e->zoom);
 	ft_putstr("\n");
 	ft_putstr("| Re : ");
-	ft_putnbr(e->cRe);
+	ft_putnbr(e->cre);
 	ft_putstr("\n");
 	ft_putstr("| Im : ");
-	ft_putnbr(e->cIm);
+	ft_putnbr(e->cim);
 	ft_putstr("\n");
 }
 
-void 	ft_key_hook4(int keycode, t_env *e)
+void	ft_key_hook4(int keycode, t_env *e)
 {
 	if (keycode == KEY_6_NUM)
 	{
@@ -50,10 +50,10 @@ void 	ft_key_hook4(int keycode, t_env *e)
 		e->how_window = 3;
 	if (keycode == KEY_5)
 		e->how_window = 4;
-	expose_hook(e);
+	e->event = 1;
 }
 
-void 	ft_key_hook3(int keycode, t_env *e)
+void	ft_key_hook3(int keycode, t_env *e)
 {
 	if (keycode == KEY_9_NUM)
 	{
@@ -107,8 +107,6 @@ void	ft_key_hook2(int keycode, t_env *e)
 		e->rgb.g += 0.1;
 	}
 	ft_key_hook3(keycode, e);
-	// ft_putnbr(keycode);
-	// ft_putchar('\n');
 }
 
 int		key_hook(int keycode, t_env *e)
@@ -128,13 +126,13 @@ int		key_hook(int keycode, t_env *e)
 	if (keycode == KEY_3)
 		e->how_window = 2;
 	if (keycode == KEY_RIGHT)
-		e->moveX -= (SPEED_TRANSLATE / e->zoom);
+		e->movex -= (SPEED_TRANSLATE / e->zoom);
 	if (keycode == KEY_LEFT)
-		e->moveX += (SPEED_TRANSLATE / e->zoom);
+		e->movex += (SPEED_TRANSLATE / e->zoom);
 	if (keycode == KEY_DOWN)
-		e->moveY -= (SPEED_TRANSLATE / e->zoom);
+		e->movey -= (SPEED_TRANSLATE / e->zoom);
 	if (keycode == KEY_UP)
-		e->moveY += (SPEED_TRANSLATE / e->zoom);
+		e->movey += (SPEED_TRANSLATE / e->zoom);
 	ft_key_hook2(keycode, e);
 	return (0);
 }

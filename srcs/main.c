@@ -6,11 +6,19 @@
 /*   By: etheodor <etheodor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/28 17:40:39 by etheodor          #+#    #+#             */
-/*   Updated: 2015/02/12 17:40:36 by etheodor         ###   ########.fr       */
+/*   Updated: 2015/02/23 11:20:41 by etheodor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+int		loop_hook(t_env *e)
+{
+	if (e->event == 1)
+		expose_hook(e);
+	e->event = 0;
+	return (0);
+}
 
 void	ft_init_win(t_env *e)
 {
@@ -19,6 +27,7 @@ void	ft_init_win(t_env *e)
 	mlx_hook(e->win, 2, 3, key_hook, e);
 	mlx_hook(e->win, 6, 64, motion_hook, e);
 	mlx_hook(e->win, 4, 5, button_hook, e);
+	mlx_loop_hook(e->mlx, loop_hook, e);
 	mlx_expose_hook(e->win, expose_hook, e);
 	mlx_loop(e->mlx);
 }

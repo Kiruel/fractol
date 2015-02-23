@@ -6,7 +6,7 @@
 /*   By: etheodor <etheodor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/28 13:52:34 by etheodor          #+#    #+#             */
-/*   Updated: 2014/11/28 13:52:36 by etheodor         ###   ########.fr       */
+/*   Updated: 2015/02/14 11:17:19 by etheodor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 static int		ft_count(const char *s, char c)
 {
 	int		i;
-	int 	counter;
+	int		counter;
 
 	counter = 0;
 	i = 0;
@@ -29,7 +29,7 @@ static int		ft_count(const char *s, char c)
 	return (counter);
 }
 
-char		**ft_strsplit(const char *s, char c)
+char			**ft_strsplit(const char *s, char c)
 {
 	char		**ret;
 	size_t		i;

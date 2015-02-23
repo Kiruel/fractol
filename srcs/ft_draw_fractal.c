@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_draw_fractal.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: etheodor <etheodor@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/02/14 10:03:38 by etheodor          #+#    #+#             */
+/*   Updated: 2015/02/14 10:56:33 by etheodor         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fractol.h"
 
 int		expose_hook(t_env *e)
@@ -20,7 +32,7 @@ void	ft_draw_frct(t_env *e)
 		draw_multi(e);
 }
 
-int 	ft_rgbtoint(int r, int g, int b)
+int		ft_rgbtoint(int r, int g, int b)
 {
 	return ((0xFF & r) << 16 | (0xFF & g) << 8 | (0xFF & b));
 }
@@ -35,8 +47,10 @@ void	ft_frct(t_env *e)
 		e->y = 0;
 		while (e->y < e->default_y)
 		{
-			e->pr = 1.5 * (e->x - e->default_x / 2) / (0.5 * e->zoom * e->default_x) + e->moveX;
-			e->pi = (e->y - e->default_y / 2) / (0.5 * e->zoom * e->default_y) + e->moveY;
+			e->pr = 1.5 * (e->x - e->default_x / 2) / (0.5 * e->zoom *
+				e->default_x) + e->movex;
+			e->pi = (e->y - e->default_y / 2) / (0.5 *
+				e->zoom * e->default_y) + e->movey;
 			ft_draw_frct(e);
 			ft_put_pixel_to_image(e, e->x, e->y, ft_color(e));
 			e->y++;

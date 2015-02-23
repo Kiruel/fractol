@@ -6,7 +6,7 @@
 /*   By: etheodor <etheodor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/31 10:47:20 by etheodor          #+#    #+#             */
-/*   Updated: 2015/02/11 17:19:29 by etheodor         ###   ########.fr       */
+/*   Updated: 2015/02/14 10:06:07 by etheodor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int		ft_error_win(t_env *e, char **av)
 	if (ft_atoi(av[2]) > 2560 || ft_atoi(av[3]) > 1350)
 	{
 		ft_putendl_fd("Error win : x > 2560 or y > 1350.", 2);
-		return (-1);		
+		return (-1);
 	}
 	e->default_x = ft_atoi(av[2]);
 	e->default_y = ft_atoi(av[3]);
